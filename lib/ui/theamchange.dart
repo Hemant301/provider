@@ -8,29 +8,29 @@ class ThemChange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themprov = Provider.of<themeProvider>(context, listen: false);
+    final themprov = Provider.of<themeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Theme Change"),
+        title: const Text("Theme Change"),
       ),
       body: Column(children: [
         RadioListTile<ThemeMode>(
           groupValue: themprov.themeMode,
           value: ThemeMode.dark,
           onChanged: themprov.setThemeMode,
-          title: Text("Dark Mode"),
+          title: const Text("Dark Mode"),
         ),
         RadioListTile<ThemeMode>(
           groupValue: themprov.themeMode,
           value: ThemeMode.light,
           onChanged: themprov.setThemeMode,
-          title: Text("light Mode"),
+          title: const Text("light Mode"),
         ),
         RadioListTile<ThemeMode>(
           groupValue: themprov.themeMode,
           value: ThemeMode.system,
           onChanged: themprov.setThemeMode,
-          title: Text("System Mode"),
+          title: const Text("System Mode"),
         ),
       ]),
     );
