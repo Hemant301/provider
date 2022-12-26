@@ -3,6 +3,7 @@ import 'package:learnprovider/provider/colorchangeprovider.dart';
 import 'package:learnprovider/provider/counterprovider.dart';
 import 'package:learnprovider/provider/favprovider.dart';
 import 'package:learnprovider/provider/themeprovide.dart';
+import 'package:learnprovider/ui/counter_page.dart';
 import 'package:learnprovider/ui/loginscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           darkTheme: ThemeData(brightness: Brightness.dark),
-          home: const LoginScreen(),
+          home: CounterPage(),
         );
       }),
     );

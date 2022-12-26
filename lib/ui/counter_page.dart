@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:learnprovider/provider/counterprovider.dart';
@@ -19,9 +20,9 @@ class _CounterPageState extends State<CounterPage> {
   void initState() {
     final counterProviders =
         Provider.of<counterProvider>(context, listen: false);
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      counterProviders.setcount();
-    });
+    // Timer.periodic(Duration(seconds: 1), (timer) {
+    //   counterProviders.setcount();
+    // });
     // TODO: implement initState
     super.initState();
   }
@@ -37,20 +38,52 @@ class _CounterPageState extends State<CounterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Center(child: Consumer<counterProvider>(
+          //   builder: (context, value, child) {
+          //     log("building is start 1");
+          //     return Text(
+          //       value.count.toString(),
+          //       style: TextStyle(fontSize: 50),
+          //     );
+          //   },
+          // )),
+          Center(
+              child: Selector<counterProvider, int>(
+            shouldRebuild: (previous, next) {
+              if (next < 2) {
+                return false;
+              } else {
+                return true;
+              }
+            },
+            selector: (_, counterProvider) => counterProvider.count,
+            builder: (context, value, child) {
+              log("building is start 1");
+              return Text(
+                value.toString(),
+                style: TextStyle(fontSize: 50),
+              );
+            },
+          )),
           Center(child: Consumer<counterProvider>(
             builder: (context, value, child) {
-              print("building is start");
+              log("building is start 2");
               return Text(
-                value.count.toString(),
+                value.c.toString(),
                 style: TextStyle(fontSize: 50),
               );
             },
           )),
           TextButton(
               onPressed: (() {
+                counterProviders.setValue();
+              }),
+              child: Center(child: Text("inc2"))),
+          TextButton(
+              onPressed: (() {
                 counterProviders.setcount();
               }),
-              child: Center(child: Text("inc")))
+              child: Center(child: Text("inc 1")))
         ],
       ),
     );
